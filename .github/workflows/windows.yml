@@ -3,8 +3,6 @@ name: Windows CI
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
   pull_request:
     types: [opened, reopened, synchronize]    # Rebuild on new pushes to PR
 

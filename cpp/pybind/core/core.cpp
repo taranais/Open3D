@@ -30,9 +30,6 @@
 
 namespace open3d {
 
-void pybind_core(py::module &m) {
-    py::module m_core = m.def_submodule("core");
-    pybind_core_dtype(m_core);
-}
+void pybind_core(py::module &m) { py::module m_core = m.def_submodule("core"); }
 
 }  // namespace open3d

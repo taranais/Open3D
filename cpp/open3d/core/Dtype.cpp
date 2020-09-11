@@ -27,36 +27,8 @@
 
 #include "open3d/core/Dtype.h"
 
-static_assert(sizeof(float) == 4,
-              "Unsupported platform: float must be 4 bytes.");
-static_assert(sizeof(double) == 8,
-              "Unsupported platform: double must be 8 bytes.");
-static_assert(sizeof(int) == 4, "Unsupported platform: int must be 4 bytes.");
-static_assert(sizeof(int32_t) == 4,
-              "Unsupported platform: int32_t must be 4 bytes.");
-static_assert(sizeof(int64_t) == 8,
-              "Unsupported platform: int64_t must be 8 bytes.");
-static_assert(sizeof(uint8_t) == 1,
-              "Unsupported platform: uint8_t must be 1 byte.");
-static_assert(sizeof(uint16_t) == 2,
-              "Unsupported platform: uint16_t must be 2 bytes.");
-static_assert(sizeof(bool) == 1, "Unsupported platform: bool must be 1 byte.");
-
 namespace open3d {
 namespace core {
-namespace dtype {
-
-// clang-format off
-const Dtype Undefined = Dtype(Dtype::DtypeCode::Undefined, 1);
-const Dtype Float32   = Dtype(Dtype::DtypeCode::Float,     4);
-const Dtype Float64   = Dtype(Dtype::DtypeCode::Float,     8);
-const Dtype Int32     = Dtype(Dtype::DtypeCode::Int,       4);
-const Dtype Int64     = Dtype(Dtype::DtypeCode::Int,       8);
-const Dtype UInt8     = Dtype(Dtype::DtypeCode::UInt,      1);
-const Dtype UInt16    = Dtype(Dtype::DtypeCode::UInt,      2);
-const Dtype Bool      = Dtype(Dtype::DtypeCode::Bool,      1);
-// clang-format on
-
-}  // namespace dtype
+namespace dtype {}  // namespace dtype
 }  // namespace core
 }  // namespace open3d

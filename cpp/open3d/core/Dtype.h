@@ -26,148 +26,101 @@
 
 #pragma once
 
+#include <iostream>
 #include <string>
-
-#include "open3d/core/Dispatch.h"
-#include "open3d/utility/Console.h"
-
-static_assert(sizeof(float) == 4,
-              "Unsupported platform: float must be 4 bytes.");
-static_assert(sizeof(double) == 8,
-              "Unsupported platform: double must be 8 bytes.");
-static_assert(sizeof(int) == 4, "Unsupported platform: int must be 4 bytes.");
-static_assert(sizeof(int32_t) == 4,
-              "Unsupported platform: int32_t must be 4 bytes.");
-static_assert(sizeof(int64_t) == 8,
-              "Unsupported platform: int64_t must be 8 bytes.");
-static_assert(sizeof(uint8_t) == 1,
-              "Unsupported platform: uint8_t must be 1 byte.");
-static_assert(sizeof(uint16_t) == 2,
-              "Unsupported platform: uint16_t must be 2 bytes.");
-static_assert(sizeof(bool) == 1, "Unsupported platform: bool must be 1 byte.");
 
 namespace open3d {
 namespace core {
 
-enum class Dtype {
-    Undefined,  // Dtype for uninitialized Tensor
-    Float32,
-    Float64,
-    Int32,
-    Int64,
-    UInt8,
-    UInt16,
-    Bool,
-};
+class Dtype;
 
-class DtypeUtil {
+namespace dtype {
+extern const Dtype Undefined;
+extern const Dtype Float32;
+extern const Dtype Float64;
+extern const Dtype Int32;
+extern const Dtype Int64;
+extern const Dtype UInt8;
+extern const Dtype UInt16;
+extern const Dtype Bool;
+}  // namespace dtype
+
+class Dtype {
 public:
-    static int64_t ByteSize(const Dtype &dtype) {
-        int64_t byte_size = 0;
-        switch (dtype) {
-            case Dtype::Float32:
-                byte_size = 4;
-                break;
-            case Dtype::Float64:
-                byte_size = 8;
-                break;
-            case Dtype::Int32:
-                byte_size = 4;
-                break;
-            case Dtype::Int64:
-                byte_size = 8;
-                break;
-            case Dtype::UInt8:
-                byte_size = 1;
-                break;
-            case Dtype::UInt16:
-                byte_size = 2;
-                break;
-            case Dtype::Bool:
-                byte_size = 1;
-                break;
-            default:
-                utility::LogError("Unsupported data type");
-        }
-        return byte_size;
+    enum class DtypeCode {
+        Undefined,
+        Bool,  // Needed to distinguish bool from uint8_t.
+        Int,
+        UInt,
+        Float,
+        Object,
+    };
+
+    Dtype() : Dtype(DtypeCode::Undefined, 1) {}
+
+    Dtype(DtypeCode dtype_code, int64_t byte_size)
+        : dtype_code_(dtype_code), byte_size_(byte_size) {
+        (void)dtype_code_;
+        (void)byte_size_;
     }
 
     /// Convert from C++ types to Dtype. Known types are explicitly specialized,
-    /// e.g. DtypeUtil::FromType<float>(). Unsupported type will result in an
-    /// exception.
+    /// e.g. FromType<float>(). Unsupported type results in an exception.
     template <typename T>
-    static inline Dtype FromType() {
-        utility::LogError("Unsupported data type");
-        return Dtype::Undefined;
+    static inline const Dtype FromType() {
+        std::cout << "Unsupported data type" << std::endl;
+        return dtype::Undefined;
     }
 
-    static std::string ToString(const Dtype &dtype) {
-        std::string str = "";
-        switch (dtype) {
-            case Dtype::Undefined:
-                str = "Undefined";
-                break;
-            case Dtype::Float32:
-                str = "Float32";
-                break;
-            case Dtype::Float64:
-                str = "Float64";
-                break;
-            case Dtype::Int32:
-                str = "Int32";
-                break;
-            case Dtype::Int64:
-                str = "Int64";
-                break;
-            case Dtype::UInt8:
-                str = "UInt8";
-                break;
-            case Dtype::UInt16:
-                str = "UInt16";
-                break;
-            case Dtype::Bool:
-                str = "Bool";
-                break;
-            default:
-                utility::LogError("Unsupported data type");
-        }
-        return str;
+    int64_t ByteSize() const { return byte_size_; }
+
+    const char *ToString() const { return "hello"; }
+
+    bool operator==(const Dtype &other) const {
+        return dtype_code_ == other.dtype_code_ &&
+               byte_size_ == other.byte_size_;
     }
+
+    bool operator!=(const Dtype &other) const { return !(*this == other); }
+
+private:
+    DtypeCode dtype_code_;
+    int64_t byte_size_;
 };
 
 template <>
-inline Dtype DtypeUtil::FromType<float>() {
-    return Dtype::Float32;
+inline const Dtype Dtype::FromType<float>() {
+    return dtype::Float32;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<double>() {
-    return Dtype::Float64;
+inline const Dtype Dtype::FromType<double>() {
+    return dtype::Float64;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<int32_t>() {
-    return Dtype::Int32;
+inline const Dtype Dtype::FromType<int32_t>() {
+    return dtype::Int32;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<int64_t>() {
-    return Dtype::Int64;
+inline const Dtype Dtype::FromType<int64_t>() {
+    return dtype::Int64;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<uint8_t>() {
-    return Dtype::UInt8;
+inline const Dtype Dtype::FromType<uint8_t>() {
+    return dtype::UInt8;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<uint16_t>() {
-    return Dtype::UInt16;
+inline const Dtype Dtype::FromType<uint16_t>() {
+    return dtype::UInt16;
 }
 
 template <>
-inline Dtype DtypeUtil::FromType<bool>() {
-    return Dtype::Bool;
+inline const Dtype Dtype::FromType<bool>() {
+    return dtype::Bool;
 }
 
 }  // namespace core

@@ -27,6 +27,8 @@
 
 #include "open3d/core/Dtype.h"
 
+#include <tbb/parallel_for.h>
+
 namespace open3d {
 namespace core {
 namespace dtype {}  // namespace dtype

@@ -53,11 +53,3 @@ jobs:
           python -m pip install -U wheel==${{ env.WHEEL_VER }}
           cd build
           cmake --build . --config ${{ matrix.CONFIG }} --target install-pip-package
-      - name: Import python package
-        # If SHARED == ON, Open3D.dll needs to be copied, which is not recommended for python.
-        if: ${{ matrix.SHARED == 'OFF' }}
-        run: |
-          python -c "import open3d; print('Imported:', open3d)"
-          python -c "import open3d; print('CUDA enabled: ', open3d.core.cuda.is_available())"
-      - name: Disk space used
-        run: Get-PSDrive (get-location).Drive

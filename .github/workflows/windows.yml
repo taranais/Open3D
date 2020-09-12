@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: |
           cd build
-          cmake --build . --parallel 2 --config ${{ matrix.CONFIG }} --target INSTALL
+          cmake --build . --parallel 2 --verbose --config ${{ matrix.CONFIG }} --target INSTALL
       - name: Install Python package
         run: |
           python -m pip install --upgrade pip==${{ env.PIP_VER }}

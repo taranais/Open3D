@@ -966,6 +966,7 @@ import_3rdparty_library(3rdparty_tbb
     LIB_DIR      ${STATIC_TBB_LIB_DIR}
     LIBRARIES    ${STATIC_TBB_LIBRARIES}
 )
+message(STATUS ">>>>>> TBB LIBRARIES: ${STATIC_TBB_LIBRARIES}")
 set(TBB_TARGET "3rdparty_tbb")
 add_dependencies(3rdparty_tbb ext_tbb)
 list(APPEND Open3D_3RDPARTY_PRIVATE_TARGETS "${TBB_TARGET}")

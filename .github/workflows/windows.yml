@@ -40,13 +40,6 @@ jobs:
         run: |
           cd build
           cmake --build . --parallel 2 --config ${{ matrix.CONFIG }} --target INSTALL
-      - name: Linking to Open3D
-        run: |
-          cd docs\_static\C++
-          mkdir build
-          cd build
-          cmake -G "Visual Studio 16 2019" -A x64 -DCMAKE_INSTALL_PREFIX="C:\Program Files\Open3D" -DSTATIC_WINDOWS_RUNTIME=${{ matrix.STATIC_RUNTIME }} ..
-          cmake --build . --config ${{ matrix.CONFIG }} && .\${{ matrix.CONFIG }}\TestVisualizer.exe
       - name: Install Python package
         run: |
           python -m pip install --upgrade pip==${{ env.PIP_VER }}

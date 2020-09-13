@@ -45,35 +45,35 @@ ExternalProject_Add(
         -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
 )
 
-ExternalProject_Add(
-    ext_mkl_include
-    PREFIX mkl_include
-    URL ${MKL_INCLUDE_URL}
-    UPDATE_COMMAND ""
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/Library/include ${MKL_INSTALL_PREFIX}/include
-)
+# ExternalProject_Add(
+#     ext_mkl_include
+#     PREFIX mkl_include
+#     URL ${MKL_INCLUDE_URL}
+#     UPDATE_COMMAND ""
+#     CONFIGURE_COMMAND ""
+#     BUILD_COMMAND ""
+#     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/Library/include ${MKL_INSTALL_PREFIX}/include
+# )
 
-ExternalProject_Add(
-    ext_mkl
-    PREFIX mkl
-    URL ${MKL_URL}
-    UPDATE_COMMAND ""
-    CONFIGURE_COMMAND ""
-    BUILD_COMMAND ""
-    INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/Library/lib ${MKL_INSTALL_PREFIX}/lib
-)
-# Generator expression can result in an empty string "", causing CMake to try to
-# locate ".lib". The workaround to first list all libs, and remove unneeded items
-# using generator expressions.
-set(STATIC_MKL_LIBRARIES
-    mkl_intel_ilp64
-    mkl_core
-    mkl_sequential
-    mkl_tbb_thread
-    tbb_static
-)
-list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:mkl_tbb_thread>")
-list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:tbb_static>")
-list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Release>:mkl_sequential>")
+# ExternalProject_Add(
+#     ext_mkl
+#     PREFIX mkl
+#     URL ${MKL_URL}
+#     UPDATE_COMMAND ""
+#     CONFIGURE_COMMAND ""
+#     BUILD_COMMAND ""
+#     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/Library/lib ${MKL_INSTALL_PREFIX}/lib
+# )
+# # Generator expression can result in an empty string "", causing CMake to try to
+# # locate ".lib". The workaround to first list all libs, and remove unneeded items
+# # using generator expressions.
+# set(STATIC_MKL_LIBRARIES
+#     mkl_intel_ilp64
+#     mkl_core
+#     mkl_sequential
+#     mkl_tbb_thread
+#     tbb_static
+# )
+# list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:mkl_tbb_thread>")
+# list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:tbb_static>")
+# list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Release>:mkl_sequential>")

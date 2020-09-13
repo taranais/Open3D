@@ -321,10 +321,12 @@ import_3rdparty_library(3rdparty_tbb
     LIB_DIR      ${STATIC_TBB_LIB_DIR}
     LIBRARIES    ${STATIC_TBB_LIBRARIES}
 )
-message(STATUS ">>>>>> TBB LIBRARIES: ${STATIC_TBB_LIBRARIES}")
-set(TBB_TARGET "3rdparty_tbb")
 add_dependencies(3rdparty_tbb ext_tbb)
+set(TBB_TARGET "3rdparty_tbb")
 list(APPEND Open3D_3RDPARTY_PRIVATE_TARGETS "${TBB_TARGET}")
+message(STATUS ">>>>>> STATIC_TBB_INCLUDE_DIR: ${STATIC_TBB_INCLUDE_DIR}")
+message(STATUS ">>>>>> STATIC_TBB_LIB_DIR: ${STATIC_TBB_LIB_DIR}")
+message(STATUS ">>>>>> STATIC_TBB_LIBRARIES: ${STATIC_TBB_LIBRARIES}")
 
 # # MKL, cuSOLVER, cuBLAS
 # # We link MKL statically. For MKL link flags, refer to:

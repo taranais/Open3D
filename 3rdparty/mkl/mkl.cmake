@@ -54,6 +54,7 @@ ExternalProject_Add(
     BUILD_COMMAND ""
     INSTALL_COMMAND ${CMAKE_COMMAND} -E copy_directory <SOURCE_DIR>/Library/include ${MKL_INSTALL_PREFIX}/include
 )
+
 ExternalProject_Add(
     ext_mkl
     PREFIX mkl
@@ -73,6 +74,6 @@ set(STATIC_MKL_LIBRARIES
     mkl_tbb_thread
     tbb_static
 )
-list(REMOVE_ITEM MKL_LIBRARIES "$<$<CONFIG:Debug>:mkl_tbb_thread>")
-list(REMOVE_ITEM MKL_LIBRARIES "$<$<CONFIG:Debug>:tbb_static>")
-list(REMOVE_ITEM MKL_LIBRARIES "$<$<CONFIG:Release>:mkl_sequential>")
+list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:mkl_tbb_thread>")
+list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Debug>:tbb_static>")
+list(REMOVE_ITEM STATIC_MKL_LIBRARIES "$<$<CONFIG:Release>:mkl_sequential>")

@@ -39,7 +39,7 @@ jobs:
       - name: Build
         run: |
           cd build
-          cmake --build . --parallel 2 --verbose --config ${{ matrix.CONFIG }} --target INSTALL && exit 0
+          cmake --build . --parallel 2 --verbose --config ${{ matrix.CONFIG }} --target INSTALL
           dir tbb\src\ext_tbb-build
           dir mkl_install
       - name: Install Python package

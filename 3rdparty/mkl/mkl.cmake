@@ -25,7 +25,7 @@ set(STATIC_MKL_LIB_DIR "${MKL_INSTALL_PREFIX}/lib")
 # TBB variables exported for PyTorch Ops and Tensorflow Ops
 set(STATIC_TBB_INCLUDE_DIR "${STATIC_MKL_INCLUDE_DIR}")
 set(STATIC_TBB_LIB_DIR "${STATIC_MKL_LIB_DIR}")
-set(STATIC_TBB_LIBRARIES tbb_static tbbmalloc_static)
+set(STATIC_TBB_LIBRARIES tbb_static)
 
 # Need to put TBB right next to MKL in the link flags. So instead of creating a
 # new tbb.cmake, it is also put here.
@@ -38,6 +38,7 @@ ExternalProject_Add(
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=${MKL_INSTALL_PREFIX}
         -DCMAKE_POSITION_INDEPENDENT_CODE=ON
+        -DSTATIC_WINDOWS_RUNTIME=${STATIC_WINDOWS_RUNTIME}
         -DTBB_BUILD_TBBMALLOC=ON
         -DTBB_BUILD_TBBMALLOC_PROXY=OFF
         -DTBB_BUILD_SHARED=OFF

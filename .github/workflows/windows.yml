@@ -41,8 +41,8 @@ jobs:
         run: |
           cd build
           cmake --build . --parallel 2 --verbose --config ${{ matrix.CONFIG }} --target 3rdparty_tbb
-          dir /a-D /S /B tbb\src\ext_tbb-build
-          dir /a-D /S /B mkl_install
+          dir tbb\src\ext_tbb-build
+          dir mkl_install
       - name: Install Python package
         run: |
           python -m pip install --upgrade pip==${{ env.PIP_VER }}

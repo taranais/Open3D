@@ -31,6 +31,10 @@
 
 namespace open3d {
 namespace core {
-namespace dtype {}  // namespace dtype
+
+void print(int n) { std::cout << "hellow world " << n << std::endl; }
+
+void foo() { tbb::parallel_for<int>(1, 10, 1, print); }
+
 }  // namespace core
 }  // namespace open3d

@@ -30,5 +30,9 @@
 #include <string>
 
 namespace open3d {
-namespace core {}  // namespace core
+namespace core {
+
+void foo();
+
+}  // namespace core
 }  // namespace open3d

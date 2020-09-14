@@ -35,6 +35,7 @@ ExternalProject_Add(
     GIT_REPOSITORY https://github.com/wjakob/tbb.git
     GIT_TAG master
     UPDATE_COMMAND ""
+    PATCH_COMMAND git apply ${Open3D_3RDPARTY_DIR}/mkl/0001-Allow-selecttion-of-static-dynamic-MSVC-runtime.patch
     CMAKE_ARGS
         -DCMAKE_INSTALL_PREFIX=${MKL_INSTALL_PREFIX}
         -DCMAKE_POSITION_INDEPENDENT_CODE=ON

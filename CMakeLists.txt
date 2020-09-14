@@ -212,6 +212,7 @@ function(open3d_set_global_properties target)
         target_compile_definitions(${target} PRIVATE UNIX)
         target_compile_options(${target} PRIVATE "-Wno-deprecated-declarations" "$<$<COMPILE_LANGUAGE:CXX>:-Wno-unused-result>")
     endif()
+    target_compile_definitions(${target} PRIVATE __TBB_LIB_NAME=tbb_static)
 endfunction()
 
 macro(add_source_group module_name)

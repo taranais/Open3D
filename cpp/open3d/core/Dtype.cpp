@@ -29,12 +29,20 @@
 
 #include <tbb/parallel_for.h>
 
+#include <vector>
+
 namespace open3d {
 namespace core {
 
-void print(int n) { std::cout << "hellow world " << n << std::endl; }
-
-void foo() { tbb::parallel_for<int>(1, 10, 1, print); }
+void foo() {
+    std::vector<size_t> tasks(10);
+    tbb::parallel_for(tbb::blocked_range<size_t>(0, tasks.size()),
+                      [&](const tbb::blocked_range<size_t>& r) {
+                          for (size_t i = r.begin(); i < r.end(); ++i) {
+                              tasks[i] = i;
+                          }
+                      });
+}
 
 }  // namespace core
 }  // namespace open3d

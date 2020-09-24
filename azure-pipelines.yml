@@ -12,6 +12,9 @@ pool:
 
 steps:
 
+- script: ./ util/scripts/install-deps-ubuntu.sh
+  displayName: 'Install Dependencies'
+
 - script: |
     mkdir build && cd build \
     && cmake -DENABLE_HEADLESS_RENDERING=ON -DENABLE_GUI=OFF -DBUILD_GLEW=ON -DBUILD_GLFW=ON .. \

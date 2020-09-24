@@ -12,7 +12,9 @@ pool:
 
 steps:
 
-- script: ./util/install-deps-ubuntu.sh
+- script: |
+    cd util
+    ./install-deps-ubuntu.sh
   displayName: 'Install Dependencies'
 
 - script: |

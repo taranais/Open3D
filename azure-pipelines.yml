@@ -12,10 +12,9 @@ pool:
 
 steps:
 
-- script: |
-    cd util
-    ./install-deps-ubuntu.sh
-  displayName: 'Install Dependencies'
+- task: ShellScript@2
+  inputs:
+    scriptPath: util/install_deps_ubuntu.sh
 
 - script: |
     mkdir build && cd build \

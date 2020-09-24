@@ -10,12 +10,8 @@ pr: none # will disable PR builds entirely; will not disable CI triggers
 pool:
   vmImage: 'ubuntu-latest'
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
 - script: |
-    ls
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    RUN cd Open3D && mkdir build && cd build \
+    && cmake -DENABLE_HEADLESS_RENDERING=ON -DENABLE_GUI=OFF -DBUILD_GLEW=ON -DBUILD_GLFW=ON .. \
+    && make -j$(nproc) 
+  displayName: 'Build Open3D'
